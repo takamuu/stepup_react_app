@@ -1,29 +1,22 @@
-import React, { useState, useCallback, useMemo } from "react";
-import "./styles.css";
-import { ChildArea } from "./ChildArea";
+import { BrowserRouter, Link } from "react-router-dom";
 
-export const App = () => {
-  console.log("App");
-  const [text, setText] = useState('');
-  const [open, setOpen] = useState(false);
+import { Home } from "./Home";
+import { Page1 } from "./Page1";
+import { Page2 } from "./Page2";
 
-  const onChangeText = (e) => setText(e.target.value);
-
-  const onClickOpen = () => setOpen(!open);
-
-  const onClickClose = useCallback(() => setOpen(false), [setOpen]);
-
-  const temp = useMemo(() => 1 + 3, []);
-
+export default function App() {
   return (
-    <div className="App">
-      <input value={text} onChange={onChangeText} />
-      <br />
-      <br />
-      <button onClick={onClickOpen}>表示</button>
-      <ChildArea open={open} onClickClose={onClickClose}/>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Link to="/">Home</Link>
+        <br />
+        <Link to="/page1">Page1</Link>
+        <br />
+        <Link to="/page2">Page2</Link>
+        <Home />
+        <Page1 />
+        <Page2 />
+      </div>
+    </BrowserRouter>
   );
 };
-
-export default App;
